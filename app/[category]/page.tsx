@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { simplifiedProduct } from "../interface";
-import { client } from "../lib/sanity";
-import Image from "next/image";
+import Link from "next/link"
+import { simplifiedProduct } from "../interface"
+import { client } from "../lib/sanity"
+import Image from "next/image"
 
 async function getData(cateogry: string) {
   const query = `*[_type == "product" && category->name == "${cateogry}"] {
@@ -11,21 +11,21 @@ async function getData(cateogry: string) {
           name,
           "slug": slug.current,
           "categoryName": category->name
-      }`;
+      }`
 
-  const data = await client.fetch(query);
+  const data = await client.fetch(query)
 
-  return data;
+  return data
 }
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic"
 
 export default async function CategoryPage({
   params,
 }: {
-  params: { category: string };
+  params: { category: string }
 }) {
-  const data: simplifiedProduct[] = await getData(params.category);
+  const data: simplifiedProduct[] = await getData(params.category)
 
   return (
     <div className="bg-white">
@@ -69,5 +69,5 @@ export default async function CategoryPage({
         </div>
       </div>
     </div>
-  );
+  )
 }
